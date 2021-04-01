@@ -12,6 +12,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -97,6 +99,7 @@ import { CompletePaymentComponent } from './complete-payment/complete-payment.co
     MatDialogModule,
     MatSlideToggleModule,
     MatNativeDateModule,
+    SweetAlert2Module
     // DatePipe
     
   ],

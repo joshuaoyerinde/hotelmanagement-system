@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BookRoomsService } from '../services/book-rooms.service';
+import Swal from 'sweetalert2/dist/sweetalert2.js';  
 
 @Component({
   selector: 'app-complete-payment',
@@ -23,6 +24,19 @@ export class CompletePaymentComponent implements OnInit {
     let reference = this.ref;
     this.bookedserve.completePayService({ref:reference}).subscribe(resp=>{
       console.log(resp);
+      let {message} = resp
+      Swal.fire({
+        icon: 'success',
+        // title: 'Oops...',
+        text: `${message}`,
+        preConfirm:()=>{
+          this.router.navigate(['/']);
+        }
+      });
+    },error=>{
+      if(error.status == 401){
+        this.router.navigate(['/complete-payment/' + this.ref])
+      }
     })
   }
 

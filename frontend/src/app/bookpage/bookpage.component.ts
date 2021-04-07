@@ -13,6 +13,7 @@ export class BookpageComponent implements OnInit {
   public userId
   public arrayOfRoom;
   public condition = true
+  public url = 'http://localhost/hotelproject/Hotel_manage/uploads/'
   constructor(
     public actroute: ActivatedRoute, 
     public router : Router, 

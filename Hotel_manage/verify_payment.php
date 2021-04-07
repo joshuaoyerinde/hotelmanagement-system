@@ -31,10 +31,25 @@ class verifypayment extends hotel
     if ($err) {
       echo "cURL Error #:" . $err;
     } else {
-      echo $response;
+        $result = json_decode($response);
+         // saving it into database.......
+        if($result->data->status == true){
+          $amount = $result->data->amount;
+          // $name = $result->data->customer->first_name;
+          $reference = 'DH'.$result->data->reference;
+          $email = $result->data->customer->email;
+          $date = date('m/d/y h:i:s a', time());
+            $stmt = $this->conn->prepare("INSERT INTO `payment_info`(amount, reference, email, date) VALUES (?,?,?,?)");
+            $stmt->bind_param("ssss", $amount, $reference, $email, $date);
+            if( $stmt->execute()){
+                $arrayName = array('success' =>'Verification successful');
+            }else{
+                $arrayName  = array('success' => 'fail to Verify');
+            }
+            echo json_encode($arrayName);
+          }
+      }
     }
-  }
-  
 }
 $verify = new verifypayment;
 $verify->verifyPay();

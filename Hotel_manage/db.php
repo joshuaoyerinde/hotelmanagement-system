@@ -48,7 +48,7 @@
     }
     // jwt auth end here
 
-    // public function sendMailer($email)
+    // public function sendMailer(  $email)
     // {
     //     $transport = (new Swift_SmtpTransport('smtp.gmail.com', 587,'tls'))
     //     ->setUsername('oyerindejoshua133@gmail.com')

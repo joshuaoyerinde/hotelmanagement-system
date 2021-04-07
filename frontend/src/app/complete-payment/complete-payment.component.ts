@@ -9,7 +9,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
   styleUrls: ['./complete-payment.component.css']
 })
 export class CompletePaymentComponent implements OnInit {
-
+  spinner = false;
   constructor(
     public actroute: ActivatedRoute,
     public router: Router,
@@ -22,20 +22,29 @@ export class CompletePaymentComponent implements OnInit {
   }
   completeTrasnsaction(){
     let reference = this.ref;
+    this.spinner = true;
     this.bookedserve.completePayService({ref:reference}).subscribe(resp=>{
       console.log(resp);
-      let {message} = resp
+      let {success} = resp
+      this.spinner = false;
       Swal.fire({
         icon: 'success',
-        // title: 'Oops...',
-        text: `${message}`,
+        text: `${success}`,
         preConfirm:()=>{
           this.router.navigate(['/']);
-        }
+
+        },
+        willClose:()=>{
+          this.router.navigate(['/']);
+       }
       });
     },error=>{
-      if(error.status == 401){
-        this.router.navigate(['/complete-payment/' + this.ref])
+      if(error.status == 'pending'){
+        // this.router.navigate(['/complete-payment/' + this.ref])
+        // this.spinner = true;
+      }
+      else if(error.status == 200){
+        this.spinner = false;
       }
     })
   }

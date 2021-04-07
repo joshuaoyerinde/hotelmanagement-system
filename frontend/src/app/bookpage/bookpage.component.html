@@ -48,7 +48,7 @@
             <div class="col-md-3 mt-2 animate__animated animate__zoomIn" *ngFor="let room of arrayOfRoom; let a = index">
                 <div class="shadow-sm bg-white">
                     <div class="inner">
-                        <img  src="assets/pics/ht1.png" class="card-img-top img-executive"  alt="">
+                        <img  [src] ="url + room.image" class="card-img-top img-executive"  alt="">
                     </div>
                     <div class="card-body">
                         <div class="card-text">

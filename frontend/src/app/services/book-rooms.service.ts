@@ -26,6 +26,9 @@ export class BookRoomsService {
   fetchedTotal(){
     return this.http.get<any>(`${this.baseurl}adminTotal.php`);
   }
+  fetchedPaymentInfo(){
+    return this.http.get<any>(`${this.baseurl}`);
+  }
 
   // for payment............
   payDta(payupdata){
